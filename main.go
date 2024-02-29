@@ -12,6 +12,7 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
+//go:embed all:frontend/dist
 var assets embed.FS
 
 //go:embed build/appicon.png
@@ -47,7 +48,7 @@ func main() {
 		OnBeforeClose:    app.beforeClose,
 		OnShutdown:       app.shutdown,
 		WindowStartState: options.Normal,
-		Bind: []interface{}{
+		Bind: []any{
 			app,
 		},
 		// Windows platform specific options
@@ -62,8 +63,8 @@ func main() {
 		// Mac platform specific options
 		Mac: &mac.Options{
 			TitleBar: &mac.TitleBar{
-				TitlebarAppearsTransparent: true,
-				HideTitle:                  false,
+				TitlebarAppearsTransparent: false,
+				HideTitle:                  true,
 				HideTitleBar:               false,
 				FullSizeContent:            false,
 				UseToolbar:                 false,
